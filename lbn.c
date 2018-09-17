@@ -136,6 +136,14 @@ static int Bisneg(lua_State *L)			/** isneg(x) */
  return 1;
 }
 
+static int Bisbitset(lua_State *L)			/** isbitset(x,y) */
+{
+ BIGNUM *a=Bget(L,1);
+ int b=lua_tointeger(L,2);
+ lua_pushboolean(L,BN_is_bit_set(a, b));
+ return 1;
+}
+
 static int Bnumber(lua_State *L)		/** number(x) */
 {
  Bget(L,1);
@@ -422,6 +430,7 @@ static const luaL_Reg R[] =
 	{ "isone",	Bisone	},
 	{ "isprime",	Bisprime},
 	{ "iszero",	Biszero	},
+	{ "isbitset", Bisbitset },
 	{ "mod",	Bmod	},
 	{ "mul",	Bmul	},
 	{ "mulmod",	Bmulmod	},
