@@ -1,23 +1,17 @@
 # makefile for bn library for Lua
 
 # change these to reflect your Lua installation
-LUA= /tmp/lhf/lua-5.1.4
-LUAINC= $(LUA)/src
-LUALIB= $(LUA)/src
-LUABIN= $(LUA)/src
-
-# these will probably work if Lua has been installed globally
-#LUA= /usr/local
-#LUAINC= $(LUA)/include
-#LUALIB= $(LUA)/lib
-#LUABIN= $(LUA)/bin
+LUA= /usr/local/openresty/luajit/
+LUAINC= $(LUA)/include
+LUALIB= $(LUA)/lib
+LUABIN= $(LUA)/bin
 
 # probably no need to change anything below here
 CC= gcc
-CFLAGS= $(INCS) $(WARN) -O2 $G
+CFLAGS= -fPIC $(INCS) $(WARN) -O2 $G
 WARN= -ansi -pedantic -Wall
 INCS= -I$(LUAINC)
-MAKESO= $(CC) -shared
+MAKESO= $(CC) -fPIC -shared
 #MAKESO= env MACOSX_DEPLOYMENT_TARGET=10.3 $(CC) -bundle -undefined dynamic_lookup
 
 MYNAME= bn
@@ -29,7 +23,7 @@ TEST= test.lua
 all:	test
 
 test:	$T
-	$(LUABIN)/lua $(TEST)
+	$(LUABIN)/luajit $(TEST)
 
 o:	$(MYLIB).o
 
