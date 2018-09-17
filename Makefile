@@ -1,7 +1,7 @@
 # makefile for bn library for Lua
 
 # change these to reflect your Lua installation
-LUA= /usr/local/openresty/luajit/
+LUA= /usr/local/openresty/luajit
 LUAINC= $(LUA)/include
 LUALIB= $(LUA)/lib
 LUABIN= $(LUA)/bin
