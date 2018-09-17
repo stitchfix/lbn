@@ -39,19 +39,6 @@ doc:
 	@echo "$(MYNAME) library:"
 	@fgrep '/**' $(MYLIB).c | cut -f2 -d/ | tr -d '*' | sort | column
 
-# distribution
-
-FTP= www:www/ftp/lua/5.1
-F= http://www.tecgraf.puc-rio.br/~lhf/ftp/lua/5.1/$A
-D= $(MYNAME)
-A= $(MYLIB).tar.gz
-TOTAR= Makefile,README,$(MYLIB).c,test.lua
-
-distr:	clean
-	tar zcvf $A -C .. $D/{$(TOTAR)}
-	touch -r $A .stamp
-	scp -p $A $(FTP)
-
 diff:	clean
 	wget -q -N $F
 	tar zxf $A
