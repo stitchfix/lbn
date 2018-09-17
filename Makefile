@@ -2,7 +2,7 @@
 
 # change these to reflect your Lua installation
 LUA= /usr/local/openresty/luajit
-LUAINC= $(LUA)/include
+LUAINC= $(LUA)/include/luajit-2.1
 LUALIB= $(LUA)/lib
 LUABIN= $(LUA)/bin
 
