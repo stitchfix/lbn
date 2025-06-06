@@ -21,12 +21,8 @@
 
 #define MYNAME		"bn"
 #define MYVERSION	MYNAME " library for " LUA_VERSION " / Nov 2010 / "\
-			"based on OpenSSL " SHLIB_VERSION_NUMBER
+			"based on OpenSSL " OPENSSL_VERSION_STR
 #define MYTYPE		MYNAME " bignumber"
-
-#ifndef BN_is_negative
-#define BN_is_negative(a) ((a)->neg != 0)
-#endif
 
 static BN_CTX *ctx=NULL;
 
@@ -194,11 +190,9 @@ static int Bsqr(lua_State *L)			/** sqr(x) */
 
 static int Bneg(lua_State *L)			/** neg(x) */
 {
- BIGNUM A;
- BIGNUM *a=&A;
+ BIGNUM *a=Bnew(L);
  BIGNUM *b=Bget(L,1);
  BIGNUM *c=Bnew(L);
- BN_init(a);
  BN_sub(c,a,b);
  return 1;
 }
@@ -208,10 +202,8 @@ static int Babs(lua_State *L)			/** abs(x) */
  BIGNUM *b=Bget(L,1);
  if (BN_is_negative(b))
  {
-  BIGNUM A;
-  BIGNUM *a=&A;
+  BIGNUM *a=Bnew(L);
   BIGNUM *c=Bnew(L);
-  BN_init(a);
   BN_sub(c,a,b);
  }
  else lua_settop(L,1);
